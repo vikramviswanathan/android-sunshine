@@ -21,6 +21,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
      * A placeholder fragment containing a simple view.
      */
     public static class PlaceholderFragment extends Fragment {
+        ArrayAdapter<String> mForcastAdapter;
+
         public PlaceholderFragment() {
         }
 
@@ -62,6 +65,14 @@ public class MainActivity extends AppCompatActivity {
                     "Sat 6/28 - TRAPPED IN WEATHERSTATION - 23/18",
                     "Sun 6/29 - Sunny - 20/7"};
             List<String> weekForecast = new ArrayList<String>(Arrays.asList(data));
+
+            // Now that we have some dummy forecast data, create an ArrayAdapter.
+            // The ArrayAdapter will take data from a source (like our dummy forecast) and
+            // use it to populate the ListView it's attached to.
+            mForcastAdapter = new ArrayAdapter<String>(
+                    getActivity(), // The current context (this activity)
+                    R.layout.list_item_forecast, // The name of the layout ID.
+                    R.id.list_item_forecast_textview, weekForecast); // The ID of the textview to populate.
 
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             return rootView;
